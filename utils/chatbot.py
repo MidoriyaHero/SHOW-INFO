@@ -1,11 +1,11 @@
 import google.generativeai as genai
 import streamlit as st
-
-
-
+import json
+key_dict = json.loads(st.secrets["geminikey"])
+api = key_dict['api']
 def generate_response(prompt_input):
 
-    genai.configure(api_key='AIzaSyAW7V0cXB7NBBAnaisbZdwCv2MIVB_K3Yg')
+    genai.configure(api_key=api)
     model = genai.GenerativeModel('gemini-pro')                      
     chatbot = model.generate_content(prompt_input)
     return chatbot.text
