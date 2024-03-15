@@ -1,0 +1,11 @@
+streamlit
+qrcode
+firebase_admin
+streamlit_geolocation
+streamlit_folium
+leafmap
+geopy
+taxicab
+osmnx
+networkx
+google.generativeai
