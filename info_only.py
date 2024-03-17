@@ -20,8 +20,6 @@ def load_user():
         phone = dic.get('Phone')
         anamnesis = dic.get('Anamnesis')
         return age,name,phone,anamnesis
-    else:
-        return None,None,None,None
 
 
 def display_profile():
@@ -37,8 +35,13 @@ def main():
     display_profile()
 
 if __name__ == "__main__":
+    st.set_page_config(page_title="HI-card", layout="centered", initial_sidebar_state="auto", menu_items=None)
     st.title("HI card - patient information 📋")
     id = st.query_params.to_dict()
+    col1, col2 = st.columns([4, 2])
     if id.keys() is not None:
-        chatbot.sidebar_chatbot()
+        #with col1:
         main()
+        #with col2:
+        chatbot.sidebar_chatbot()
+        
