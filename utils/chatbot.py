@@ -10,7 +10,7 @@ def generate_response(prompt_input):
     chatbot = model.generate_content(prompt_input)
     return chatbot.text
 def sidebar_chatbot():
-    with st.sidebar():
+    #ith st.sidebar():
         st.title('HI bot')
         # Store LLM generated responses
         if "messages" not in st.session_state.keys():

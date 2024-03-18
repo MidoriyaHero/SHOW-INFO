@@ -8,6 +8,29 @@ key_dict = json.loads(st.secrets["textkey"])
 creds = Credentials.from_service_account_info(key_dict)
 db = firestore.Client(credentials=creds)
 
+css = '''
+<style>
+    [data-testid='stImage'] {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+</style>
+'''
+
+st.markdown(css, unsafe_allow_html=True)
+def load_stored_image():
+    doc_ref = db.collection("Users").document(id['uid'])
+
+    # Get the image data (Base64 string)
+    doc = doc_ref.get()
+    image_data = doc.to_dict().get('Image')
+
+    if image_data is None:
+        return None
+    
+    return st.image(image_data, width=200, use_column_width ='auto')
 
 #db = firestore.Client.from_service_account_json("key.json", project="CARD")
 def load_user():
@@ -21,13 +44,10 @@ def load_user():
         anamnesis = dic.get('Anamnesis')
         return age,name,phone,anamnesis
 
-
 def display_profile():
     age,name,phone,anamnesis = load_user()
-    name = st.info('Name: '+name)
-    age = st.info('Age: '+age)
-    phone = st.info('Phone: '+phone)
-    anamnesis = st.info('Anamnesis: '+anamnesis)
+    st.markdown(f"**{name}**")
+    st.markdown(f"Age: {age} <br>Phone: {phone}<br>Anamnesis: {anamnesis}",unsafe_allow_html=True)
 
 
 def main():
@@ -35,13 +55,16 @@ def main():
     display_profile()
 
 if __name__ == "__main__":
-    st.set_page_config(page_title="HI-card", layout="centered", initial_sidebar_state="auto", menu_items=None)
     st.title("HI card - patient information 📋")
     id = st.query_params.to_dict()
-    col1, col2 = st.columns([4, 2])
-    if id.keys() is not None:
-        #with col1:
+    col1, col2 = st.columns([3, 5])
+
+    with col1:
+        load_stored_image()
         main()
-        #with col2:
-        chatbot.sidebar_chatbot()
+        st.divider()
+    with col2:
+        with st.container(border= True):
+            chatbot.sidebar_chatbot()
+
         
