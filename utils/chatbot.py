@@ -11,7 +11,7 @@ def generate_response(prompt_input):
     return chatbot.text
 def sidebar_chatbot():
     #ith st.sidebar():
-        st.title('HI bot')
+        #st.title('HI bot')
         # Store LLM generated responses
         if "messages" not in st.session_state.keys():
             st.session_state.messages = [{"role": "assistant", "content": "Tôi có thể giúp gì cho bạn?"}]

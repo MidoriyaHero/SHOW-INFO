@@ -16,6 +16,21 @@ css = '''
         border-radius: 50%;
         overflow: hidden;
     }
+     }
+
+    [data-testid='stExpander'] {
+        border: none;
+        box-shadow: none;
+
+    }
+    [data-testid='stExpander'] section {
+        padding: 0;
+        float: left;
+    }
+    [data-testid='stExpander'] section + div {
+        float: right;
+        padding-top: 0;
+    }
 </style>
 '''
 
@@ -63,8 +78,9 @@ if __name__ == "__main__":
         load_stored_image()
         main()
         st.divider()
+        
     with col2:
         with st.container(border= True):
+            st.write("CHO NAY DE SHOW MAP")
+        with st.expander(":toolbox: Hỏi HI-bot"):
             chatbot.sidebar_chatbot()
-
-        
