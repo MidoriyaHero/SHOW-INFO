@@ -24,12 +24,15 @@ css = '''
 
     }
     [data-testid='stExpander'] section {
-        padding: 0;
-        float: left;
+        overflow: hidden;
+        text-align: center;
+        display: inline-block;
+        width: 100%;
+        margin-right: -50%;
+
     }
     [data-testid='stExpander'] section + div {
         float: right;
-        padding-top: 0;
     }
 </style>
 '''
