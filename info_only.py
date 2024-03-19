@@ -1,5 +1,5 @@
 import streamlit as st
-from utils import function, chatbot
+from utils import map, chatbot
 from firebase_admin import firestore
 import json
 from google.oauth2.service_account import Credentials
@@ -73,7 +73,7 @@ def main():
     display_profile()
 
 if __name__ == "__main__":
-    st.title("HI card - patient information 📋")
+    st.title("HI card📋")
     id = st.query_params.to_dict()
     col1, col2 = st.columns([3, 5])
 
@@ -81,9 +81,8 @@ if __name__ == "__main__":
         load_stored_image()
         main()
         st.divider()
-        
-    with col2:
-        with st.container(border= True):
-            st.write("CHO NAY DE SHOW MAP")
         with st.expander(":toolbox: Hỏi HI-bot"):
             chatbot.sidebar_chatbot()
+    with col2:
+        with st.container(border= True):
+            map.pinpoint()

@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <script type= "text/javascript"></script>
+        <script>
+            function printMess() {
+  alert("Hello World!")
+}
+        </script>
+    </head>
+    <body>
+    <div style="font-family: Arial, sans-serif; position: relative;">
+        <h2 style="margin-bottom: 5px; text-align: center;">{{hospital_name}}</h2>
+        <table style="width: 100%;">
+            <tr>
+                <td style="font-weight: bold;">Phone:</td>
+                <td>{{hospital_phone}}</td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">Location:</td>
+                <td>{{location_of_hospital}}</td>
+            </tr>
+        </table>
+        <button onclick= "printMess()">Call Function</button>
+        <div id= 'output'></div>
+            <!-- Add more information here if needed -->
+    </div>
+    </body>
+    </html>
