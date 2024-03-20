@@ -8,6 +8,8 @@ key_dict = json.loads(st.secrets["textkey"])
 creds = Credentials.from_service_account_info(key_dict)
 db = firestore.Client(credentials=creds)
 
+# anamnesis is medical history 
+
 css = '''
 <style>
     [data-testid='stImage'] {
@@ -65,7 +67,7 @@ def load_user():
 def display_profile():
     age,name,phone,anamnesis = load_user()
     st.markdown(f"**{name}**")
-    st.markdown(f"Age: {age} <br>Phone: {phone}<br>Anamnesis: {anamnesis}",unsafe_allow_html=True)
+    st.markdown(f"Tuổi: {age} <br>SDT: {phone}<br>Tiền sử: {anamnesis}",unsafe_allow_html=True)
 
 
 def main():
