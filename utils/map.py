@@ -18,7 +18,7 @@ popup_dir = os.path.join(parent_dir, "my_map.html")
 css = '''
 <style>
     [data-testid='stIFrame'] {
-        height: 400px;
+        height: 200px;
     }
 </style>
 '''
