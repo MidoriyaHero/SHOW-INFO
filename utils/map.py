@@ -92,7 +92,7 @@ def pinpoint():
     #xóa đoạn này
     key_map ={'center': coordinate, 
               'zoom':12,
-              'height':200
+              'height':20
               }
     m = leafmap.Map(**key_map)
     
