@@ -90,7 +90,7 @@ def pinpoint():
     else:
         coordinate = (10.877600593377078, 106.80162093651423)  
     #xóa đoạn này 
-    m = leafmap.Map(center=coordinate, zoom=13,height = 200, width = 200)
+    m = leafmap.Map(center=coordinate, zoom=13,height = 100, width = 200)
     
     m.add_basemap(BASEMAPS)
 
