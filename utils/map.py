@@ -15,7 +15,15 @@ from jinja2 import Template
 parent_dir = os.path.dirname(os.path.abspath(__file__))
 popup_dir = os.path.join(parent_dir, "my_map.html")
 
+css = '''
+<style>
+    [data-testid='stIFrame'] {
+        height: 400px;
+    }
+</style>
+'''
 
+st.markdown(css, unsafe_allow_html=True)
 
 def pinpoint():
     list_of_hospital_name = ['Bệnh viện Tâm Anh',
@@ -88,16 +96,15 @@ def pinpoint():
     if location['latitude'] and location['longitude'] is not None:
         coordinate = (location['latitude'], location['longitude'])
     else:
-        coordinate = (10.877600593377078, 106.80162093651423)  
+        coordinate = (10.877600593377078, 106.80162093651423)
+    
     #xóa đoạn này
-    key_map ={'center': coordinate, 
+    key_map ={'center': coordinate,
               'zoom':12,
               'height':20
               }
     m = leafmap.Map(**key_map)
-    
     m.add_basemap(BASEMAPS)
-
     template = Template(open(popup_dir).read())
     for index, station in enumerate(list_of_hospital_locations):
         my_data = {
