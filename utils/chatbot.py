@@ -33,6 +33,10 @@ def generate_response(prompt_input):
     return text
 
 def sidebar_chatbot():
+        id = st.query_params.to_dict()
+        doc_ref = db.collection("Users").document(id['uid'])
+        doc = doc_ref.get()
+        tien_su = doc.to_dict().get('Anamnesis')
         if "messages" not in st.session_state.keys():
             st.session_state.messages = [{"role": "assistant", "content": "Tôi có thể giúp gì cho bạn?"}]
 
@@ -70,9 +74,5 @@ def sidebar_chatbot():
             st.session_state.messages.append(message)
 
 if __name__ == "__main__":
-    id = st.query_params.to_dict()
-    doc_ref = db.collection("Users").document(id['uid'])
-    doc = doc_ref.get()
-    tien_su = doc.to_dict().get('Anamnesis')
     sidebar_chatbot()
         
