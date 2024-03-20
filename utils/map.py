@@ -90,7 +90,7 @@ def pinpoint():
     else:
         coordinate = (10.877600593377078, 106.80162093651423)  
     #xóa đoạn này 
-    m = leafmap.Map(center=coordinate, zoom=13,height = 50, width = 200)
+    m = leafmap.Map(center=coordinate, zoom=13,height = 50, width = 50)
     
     m.add_basemap(BASEMAPS)
 
@@ -103,7 +103,7 @@ def pinpoint():
         }
         html = template.render(my_data)
         iframe = folium.IFrame(html)
-        popup = folium.Popup(iframe, min_width=400, max_width=400)
+        popup = folium.Popup(iframe, min_width=100, max_width=400)
         m.add_marker(location=list(station), icon=folium.Icon(color='green', icon='hospital', prefix='fa'), popup=popup)
     m.add_marker(location=list(coordinate), icon=folium.Icon(color='red', icon='suitcase', prefix='fa'))
     m.to_streamlit()
