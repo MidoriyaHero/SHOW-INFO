@@ -51,12 +51,12 @@ def sidebar_chatbot():
                 st.write(prompt)
         # make quick question
         col1, col2 = st.columns([1,3])    
-        if col1.button(f'Dấu hiệu người bị {tien_su}',key = 1):
+        if col1.button(f'Dấu hiệu người bị {tien_su}',key = 'tindeptrai'):
             with st.chat_message("user"):
                 prompt = (f'Dấu hiệu người bị {tien_su}')
                 st.write(prompt)
                 st.session_state.messages.append({"role": "user", "content": prompt})
-        if col2.button(f'Sơ cứu người bị {tien_su}',key = 2):
+        if col2.button(f'Sơ cứu người bị {tien_su}',key = 'thuyvydepgai'):
             with st.chat_message("user"):
                 prompt = (f'Cấp cứu người bị {tien_su}')
                 st.write(prompt)
