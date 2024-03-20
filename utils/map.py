@@ -15,15 +15,6 @@ from jinja2 import Template
 parent_dir = os.path.dirname(os.path.abspath(__file__))
 popup_dir = os.path.join(parent_dir, "my_map.html")
 
-css = '''
-<style>
-    [data-testid='stIFrame'] {
-        height: 200px;
-    }
-</style>
-'''
-
-st.markdown(css, unsafe_allow_html=True)
 
 def pinpoint():
     list_of_hospital_name = ['Bệnh viện Tâm Anh',
@@ -113,7 +104,7 @@ def pinpoint():
             "location_of_hospital": f"{location_of_hospital[index]}",
         }
         html = template.render(my_data)
-        iframe = folium.IFrame(html)
+        iframe = folium.IFrame(html,height = 200)
         popup = folium.Popup(iframe, min_width=300, max_width=400)
         m.add_marker(location=list(station), icon=folium.Icon(color='green', icon='hospital', prefix='fa'), popup=popup)
     m.add_marker(location=list(coordinate), icon=folium.Icon(color='red', icon='suitcase', prefix='fa'))
