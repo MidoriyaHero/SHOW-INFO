@@ -36,6 +36,10 @@ css = '''
     [data-testid='stExpander'] section + div {
         float: right;
     }
+    }
+    [class='folium-map leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom'] section
+        height: 200px;
+    }
 </style>
 '''
 
@@ -83,7 +87,7 @@ if __name__ == "__main__":
         load_stored_image()
         main()
         st.divider()
-        with st.expander(":toolbox: Hỏi HI-bot"):
+        with st.expander(":toolbox: Hỏi HI-assistant"):
             chatbot.sidebar_chatbot()
     with col2:
         with st.container(border= True):

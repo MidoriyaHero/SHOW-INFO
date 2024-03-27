@@ -56,7 +56,7 @@ def sidebar_chatbot():
                 prompt = (f'Dấu hiệu người bị {tien_su}')
                 st.write(prompt)
                 st.session_state.messages.append({"role": "user", "content": prompt})
-        if st.button(f'Sơ cứu người bị {tien_su}',key = 'thuyvydepgai'):
+        if st.button(f'Sơ cứu người bị {tien_su}',key = 'tin'):
             with st.chat_message("user"):
                 prompt = (f'Cấp cứu người bị {tien_su}')
                 st.write(prompt)
