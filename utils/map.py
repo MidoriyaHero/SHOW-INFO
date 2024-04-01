@@ -57,8 +57,9 @@ def pinpoint():
                                   (10.832052719670008, 106.62188470958347),
                                   (10.797957838504837, 106.67683000080417),
                                   (10.7915574, 106.6527376)]
-    list_of_hospital_phone = ["0799641806", "0799641806","0799641806","0799641806","0799641806","0799641806","0799641806",
-                              "0799641806","0799641806","0799641806","0799641806",
+    list_of_hospital_phone = ["028 7102 6789", "028 3855 4138", "028 3622 1166", "1900 1175",
+                              "1800 6767", "028 3923 5804", "028 3855 0207", "028 3722 3556",
+                              "028 3730 7125", "028 3990 2468", "028 3923 4260", "028 3897 3628",
                               "0966 331 010" "028 3829 1711", "NA", "NA", "028 3843 3022",
                               "0985 095 100", "028 3844 1399", '028 3844 1399', "028 3869 0277"]
     location_of_hospital = ["2B Đ. Phổ Quang, Phường 2, Tân Bình, Thành phố Hồ Chí Minh",
@@ -103,7 +104,7 @@ def pinpoint():
             "location_of_hospital": f"{location_of_hospital[index]}",
         }
         html = template.render(my_data)
-        iframe = folium.IFrame(html,height = 200)
+        iframe = folium.IFrame(html,height = 100)
         popup = folium.Popup(iframe, min_width=300, max_width=300)
         m.add_marker(location=list(station), icon=folium.Icon(color='green', icon='hospital', prefix='fa'), popup=popup)
     m.add_marker(location=list(coordinate), icon=folium.Icon(color='red', icon='suitcase', prefix='fa'))
