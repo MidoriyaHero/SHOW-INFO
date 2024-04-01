@@ -7,6 +7,7 @@ import folium
 from streamlit_geolocation import streamlit_geolocation
 import leafmap.foliumap as leafmap
 import base64
+from geopy.distance import geodesic
 TRAVEL_OPTIMIZER = ['Length', 'Time']
 BASEMAPS = "OpenStreetMap"
 from geopy.geocoders import Nominatim
@@ -15,6 +16,10 @@ from jinja2 import Template
 parent_dir = os.path.dirname(os.path.abspath(__file__))
 popup_dir = os.path.join(parent_dir, "my_map.html")
 
+def handle_value(initial_value, loc_hos):
+
+    dist = geodesic(initial_value, loc_hos).km
+    return dist
 
 def pinpoint():
     list_of_hospital_name = ['Bệnh viện Tâm Anh',
@@ -95,6 +100,10 @@ def pinpoint():
               "height": 300
               }
     m = leafmap.Map(**key_map)
+    h = []
+    for r in list_of_hospital_locations:
+        value = handle_value(coordinate, r)  # Extract the distance (int)
+        h.append(value)
     m.add_basemap(BASEMAPS)
     template = Template(open(popup_dir).read())
     for index, station in enumerate(list_of_hospital_locations):
@@ -108,6 +117,17 @@ def pinpoint():
         popup = folium.Popup(iframe, min_width=300, max_width=300)
         m.add_marker(location=list(station), icon=folium.Icon(color='green', icon='hospital', prefix='fa'), popup=popup)
     m.add_marker(location=list(coordinate), icon=folium.Icon(color='red', icon='suitcase', prefix='fa'))
+    st.info(f"Gần nhất:  \n{list_of_hospital_name[h.index(min(h))]} -- {round(min(h), 2)} km", icon = "🚨")
+    # Re-plot closest hospital
+    closest = {
+            'hospital_name': f"{list_of_hospital_name[h.index(min(h))]}",
+            "hospital_phone": f"{list_of_hospital_phone[h.index(min(h))]}",
+            "location_of_hospital": f"{location_of_hospital[h.index(min(h))]}"
+    }
+    html = template.render(closest)
+    iframe = folium.IFrame(html,height = 200)
+    popup = folium.Popup(iframe, min_width=300, max_width=300)
+    m.add_marker(location=list_of_hospital_locations[h.index(min(h))], icon=folium.Icon(color='blue', icon='hospital', prefix='fa'), popup=popup)
     m.to_streamlit()
 
 
