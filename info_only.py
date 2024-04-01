@@ -90,5 +90,5 @@ if __name__ == "__main__":
         with st.expander(":toolbox: Hỏi HI-assistant"):
             chatbot.sidebar_chatbot()
     with col2:
-        with st.container(border= True):
+        with st.container(border= True, height = 500):
             map.pinpoint()
