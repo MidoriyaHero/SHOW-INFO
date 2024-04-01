@@ -14,8 +14,12 @@ geolocator = Nominatim(user_agent="MyApp", timeout = 5)
 from jinja2 import Template
 parent_dir = os.path.dirname(os.path.abspath(__file__))
 popup_dir = os.path.join(parent_dir, "my_map.html")
+from geopy.distance import geodesic
 
+def handle_value(initial_value, loc_hos):
 
+    dist = geodesic(initial_value, loc_hos).km
+    return dist
 def pinpoint():
     list_of_hospital_name = ['Bệnh viện Tâm Anh',
                              'Bệnh viện Chợ Rẫy',
@@ -95,6 +99,10 @@ def pinpoint():
               'height':20
               }
     m = leafmap.Map(**key_map)
+    h = []
+    for r in list_of_hospital_locations:
+        value = handle_value(coordinate, r)  # Extract the distance (int)
+        h.append(value)
     m.add_basemap(BASEMAPS)
     template = Template(open(popup_dir).read())
     for index, station in enumerate(list_of_hospital_locations):
@@ -108,6 +116,7 @@ def pinpoint():
         popup = folium.Popup(iframe, min_width=300, max_width=300)
         m.add_marker(location=list(station), icon=folium.Icon(color='green', icon='hospital', prefix='fa'), popup=popup)
     m.add_marker(location=list(coordinate), icon=folium.Icon(color='red', icon='suitcase', prefix='fa'))
+    st.write("The closest: ", list_of_hospital_name[h.index(min(h))],f" which is {round(min(h), 2)} km")
     m.to_streamlit()
 
 
