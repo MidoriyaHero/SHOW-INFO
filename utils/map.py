@@ -126,7 +126,7 @@ def pinpoint():
     }
     html = template.render(closest)
     iframe = folium.IFrame(html,height = 200)
-    popup = folium.Popup(iframe, min_width=300, max_width=300)
+    popup = folium.Popup(iframe, min_width=250, max_width=250)
     m.add_marker(location=list_of_hospital_locations[h.index(min(h))], icon=folium.Icon(color='blue', icon='hospital', prefix='fa'), popup=popup)
     m.to_streamlit()
 
