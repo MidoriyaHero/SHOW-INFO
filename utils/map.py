@@ -104,8 +104,8 @@ def pinpoint():
             "location_of_hospital": f"{location_of_hospital[index]}",
         }
         html = template.render(my_data)
-        iframe = folium.IFrame(html,height = 50)
-        popup = folium.Popup(iframe, min_width=300, max_width=400)
+        iframe = folium.IFrame(html,height = 200)
+        popup = folium.Popup(iframe, min_width=300, max_width=300)
         m.add_marker(location=list(station), icon=folium.Icon(color='green', icon='hospital', prefix='fa'), popup=popup)
     m.add_marker(location=list(coordinate), icon=folium.Icon(color='red', icon='suitcase', prefix='fa'))
     m.to_streamlit()
