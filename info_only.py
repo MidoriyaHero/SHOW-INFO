@@ -83,9 +83,10 @@ if __name__ == "__main__":
     id = st.query_params.to_dict()
     col1, col2 = st.columns([3, 5])
 
-    #with col1:
-    load_stored_image()
-    main()
+    with col1:
+        load_stored_image()
+    with col2:
+        main()
     st.divider()
         #with st.expander(":toolbox: Hỏi HI-assistant"):
             #chatbot.sidebar_chatbot()
