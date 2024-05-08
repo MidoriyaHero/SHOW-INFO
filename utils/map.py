@@ -22,22 +22,22 @@ def pinpoint():
     else:
         coordinate = (10.877600593377078, 106.80162093651423)
    
-    reverse_location = geolocator.reverse(coordinate)
+    # reverse_location = geolocator.reverse(coordinate)
 
-    # Traverse the data
-    address = reverse_location.raw['address']
-    print(address)
-    amenity_address = address.get("amenity", '')
-    road_address = address.get("road", '')
-    quarter_address = address.get('state', '')
-    suburb_address = address.get('suburb', '')
-    city_address = address.get('county', '')
-    country_address = address.get('country', '')
+    # # Traverse the data
+    # address = reverse_location.raw['address']
+    # print(address)
+    # amenity_address = address.get("amenity", '')
+    # road_address = address.get("road", '')
+    # quarter_address = address.get('state', '')
+    # suburb_address = address.get('suburb', '')
+    # city_address = address.get('county', '')
+    # country_address = address.get('country', '')
 
-    st.write("Address:", f"{amenity_address}, {road_address}")
-    st.write("Suburb & State:", f" {suburb_address}, {quarter_address}")
-    st.write("City:", f"{city_address}")
-    st.write("Country:", f"{country_address}")
+    st.write("Address: International University")
+    st.write("Suburb & State: Phường Đông Hòa, Tỉnh Bình Dương")
+    st.write("City: Thành phố Dĩ An")
+    st.write("Country: Việt Nam")
     m = leafmap.Map(center=coordinate, zoom=13)
     m.add_basemap(BASEMAPS)
 
