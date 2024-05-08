@@ -40,5 +40,4 @@ def pinpoint():
     m.add_marker(location=list(coordinate), icon=folium.Icon(color='red', icon='suitcase', prefix='fa'))
     m.to_streamlit()
 if __name__ == "__main__":
-
     pinpoint()
