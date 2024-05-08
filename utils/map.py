@@ -30,10 +30,10 @@ def pinpoint():
     city_address = address.get('county', '')
     country_address = address.get('country', '')
 
-    amenity_and_road = st.sidebar.text_input("Address", f"{amenity_address}, {road_address}")
-    Quar = st.sidebar.text_input("Suburb & State", f" {suburb_address}, {quarter_address}")
-    city = st.sidebar.text_input("City", f"{city_address}")
-    country = st.sidebar.text_input("Country", f"{country_address}")
+    amenity_and_road = st.write("Address", f"{amenity_address}, {road_address}")
+    Quar = st.write("Suburb & State", f" {suburb_address}, {quarter_address}")
+    city = st.write("City", f"{city_address}")
+    country = st.write("Country", f"{country_address}")
     m = leafmap.Map(center=coordinate, zoom=13)
     m.add_basemap(BASEMAPS)
 

@@ -87,7 +87,7 @@ if __name__ == "__main__":
         load_stored_image()
     with col2:
         main()
-    map.pinpoint() #xoa cai nay di 
+        map.pinpoint() #xoa cai nay di 
     st.divider()
         #with st.expander(":toolbox: Hỏi HI-assistant"):
             #chatbot.sidebar_chatbot()
