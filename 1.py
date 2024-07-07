@@ -2,7 +2,7 @@ import toml
 
 output_file = ".streamlit/secrets.toml"
 
-with open("key.json") as json_file:
+with open(r"C:\Users\buitr\CODE\FCM-with-Python-and-Android\PythonFCMTest\serviceAccountKey.json") as json_file:
     json_text = json_file.read()
 
 config = {"textkey": json_text}

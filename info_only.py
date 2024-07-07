@@ -1,5 +1,5 @@
 import streamlit as st
-from utils import map, chatbot
+from utils import map, chatbot, FCMManager
 from firebase_admin import firestore
 import json
 from google.oauth2.service_account import Credentials
@@ -45,34 +45,25 @@ css = '''
 
 st.markdown(css, unsafe_allow_html=True)
 def load_stored_image():
-    doc_ref = db.collection("Users").document(id['uid'])
-
     # Get the image data (Base64 string)
+    doc_ref = db.collection("Users").document(id['uid'])
     doc = doc_ref.get()
     image_data = doc.to_dict().get('Image')
-
     if image_data is None:
         return None
-    
     return st.image(image_data, width=200, use_column_width ='auto')
 
-#db = firestore.Client.from_service_account_json("key.json", project="CARD")
 def load_user():
     doc_ref = db.collection("Users").document(id['uid'])
     doc = doc_ref.get()
     dic = doc.to_dict()
     if dic is not None:
-        age = dic.get('Age')
-        name = dic.get('Name')
-        phone = dic.get('Phone')
-        anamnesis = dic.get('Anamnesis')
-        return age,name,phone,anamnesis
+        return dic 
 
 def display_profile():
-    age,name,phone,anamnesis = load_user()
-    st.markdown(f"**{name}**")
-    st.markdown(f"Tuổi: {age} <br>SDT: {phone}<br>Tiền sử: {anamnesis}",unsafe_allow_html=True)
-
+    dic = load_user()
+    st.markdown(f"**{dic['Name']}**")
+    st.markdown(f"Tuổi: {dic['Age']} <br>SDT: {dic['Phone']}<br>Tiền sử: {dic['Anamnesis']}",unsafe_allow_html=True)
 
 def main():
     #st.write(id)
@@ -82,15 +73,20 @@ if __name__ == "__main__":
     st.title("HI card📋")
     id = st.query_params.to_dict()
     col1, col2 = st.columns([3, 5])
-
+    dic = load_user()
     with col1:
+        if st.button("Gọi Cứu Thương!!!"):
+            doc_ref = db.collection("Token")
+            doc = doc_ref.get()
+            token_list = [i.to_dict()['device'] for i in doc]
+            #token = ['cL-KKticS8CLY9qLxpwWtw:APA91bEPLVmuQ1rOIQfTGXXOnZl5oAlS0MV9D-jbivEG9G0dq4v0PaR0lpE-O_Icvi2eTCXxJV9yYTX2swahYQK_Bjv98kE0wzUNjWnad1U-RHjknaDJcwbTZNdvc62XAopf6CL_zOXh']
+            FCMManager.sendPush("Hi-Card", "HAHAH GHÊ CHƯA- Tín đẹp trai!!!", token_list)
         load_stored_image()
     with col2:
         main()
-    map.pinpoint() #xoa cai nay di 
     st.divider()
-        #with st.expander(":toolbox: Hỏi HI-assistant"):
-            #chatbot.sidebar_chatbot()
-    #with col2:
-        #with st.container(border= True):
-            #map.pinpoint()
+    with st.expander(":toolbox: Hỏi HI-assistant"):
+        chatbot.sidebar_chatbot()
+    with col2:
+        with st.container(border= True):
+            map.pinpoint()
