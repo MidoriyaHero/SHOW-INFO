@@ -91,6 +91,7 @@ def pinpoint():
     location = streamlit_geolocation(key=1)
     try: 
         coordinate = (location['latitude'], location['longitude'])
+        pinpoint.cordinate = coordinate
             #xóa đoạn này
         key_map ={'center': coordinate,
                 'zoom':12,
@@ -129,8 +130,8 @@ def pinpoint():
     except:
         st.write('Vui lòng bật vị trí và nhấn nút để lấy vị trí chính xác')
         st.stop()
-
+def coor():
+    return pinpoint.cordinate
 #add file map tam thoi
 if __name__ == "__main__":
-
     pinpoint()

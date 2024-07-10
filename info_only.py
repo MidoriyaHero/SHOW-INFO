@@ -76,11 +76,20 @@ if __name__ == "__main__":
     dic = load_user()
     with col1:
         if st.button("Gọi Cứu Thương!!!"):
-            doc_ref = db.collection("Token")
-            doc = doc_ref.get()
-            token_list = [i.to_dict()['device'] for i in doc]
-            #token = ['cL-KKticS8CLY9qLxpwWtw:APA91bEPLVmuQ1rOIQfTGXXOnZl5oAlS0MV9D-jbivEG9G0dq4v0PaR0lpE-O_Icvi2eTCXxJV9yYTX2swahYQK_Bjv98kE0wzUNjWnad1U-RHjknaDJcwbTZNdvc62XAopf6CL_zOXh']
-            FCMManager.sendPush("Hi-Card", "HAHAH GHÊ CHƯA- Tín đẹp trai!!!", token_list)
+            try: 
+                location = map.coor()
+                doc_ref = db.collection("Token")
+                doc = doc_ref.get()
+                token_list = [i.to_dict()['device'] for i in doc]
+                FCMManager.sendPush("Hi-Card", "Có người người ngã xuống!!!", token_list, 
+                                    dataObject = {"patient_name":dic['Name'],
+                                                "patient_age": dic['Age'],
+                                                "patient_phone": dic['Phone'],
+                                                "patient_history":dic['Anamnesis'],
+                                                "long": str(location[1]),
+                                                'lat': str(location[0])})
+            except:
+                st.warning('Vui lòng bật vị trí!!')
         load_stored_image()
     with col2:
         main()
