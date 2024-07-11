@@ -94,7 +94,7 @@ if __name__ == "__main__":
     with col2:
         main()
     st.divider()
-    with st.expander(":toolbox: Hỏi HI-assistant"):
+    with st.expander(":toolbox: Hỏi Trợ Lí ảo HI-Card"):
         chatbot.sidebar_chatbot()
     with col2:
         with st.container(border= True):
